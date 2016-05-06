@@ -21,7 +21,7 @@ brooklyn.catalog:
     version: 1.0
     itemType: template
     iconUrl: https://github.com/brooklyncentral/brooklyn-jboss-application-server-6/raw/master/jboss-logo.png
-    name: JBoss AS 6 tests
+    name: JBoss Application Server 6 tests
     description: Test that JBoss is running
     license_code: Apache-2.0
     license_url: http://www.apache.org/licenses/LICENSE-2.0.txt
@@ -33,7 +33,7 @@ brooklyn.catalog:
         brooklyn.config:
           timeout: 15m
           targetId: jboss6
-        name: JBoss AS 6 Tests
+        name: JBoss Application Server 6 Tests
         brooklyn.children:
         - type: org.apache.brooklyn.test.framework.TestCase
           name: "Sensor Tests"
