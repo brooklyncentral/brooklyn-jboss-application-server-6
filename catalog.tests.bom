@@ -32,6 +32,7 @@ brooklyn.catalog:
       - type: org.apache.brooklyn.test.framework.TestCase
         brooklyn.config:
           timeout: 15m
+          targetId: jboss6
         name: JBoss AS 6 Tests
         brooklyn.children:
         - type: org.apache.brooklyn.test.framework.TestCase
@@ -46,7 +47,6 @@ brooklyn.catalog:
             - matches: running
           - type: org.apache.brooklyn.test.framework.TestEffector
             name: Invoke Deploy Effector
-            targetId: jboss6
             effector: deploy
             params:
               url: https://tomcat.apache.org/tomcat-8.0-doc/appdev/sample/sample.war
@@ -58,56 +58,47 @@ brooklyn.catalog:
           # Effector: restart Tests
           - type: org.apache.brooklyn.test.framework.TestEffector
             name: Invoke restart Effector
-            targetId: jboss6
             effector: restart
             params:
               restartMachine: false
           - type: org.apache.brooklyn.test.framework.TestSensor
             name: Check JBoss is up after restart
-            targetId: jboss6
             sensor: service.isUp
             assert:
             - equals: true
           - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
             name: Check JBoss process has restarted
-            targetId: jboss6
             command: ps -ef | grep [j]boss
             assertStatus:
               equals: 0
           # Effector: stop + restart Tests
           - type: org.apache.brooklyn.test.framework.TestEffector
             name: Invoke stop Effector
-            targetId: jboss6
             effector: stop
             params:
               stopMachineMode: NEVER
           - type: org.apache.brooklyn.test.framework.TestSensor
             name: Check JBoss is not up after stop
-            targetId: jboss6
             sensor: service.isUp
             assert:
             - equals: false
           - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
             name: Check JBoss process has stopped
-            targetId: jboss6
             command: ps -ef | grep [j]boss
             assertStatus:
               equals: 1
           - type: org.apache.brooklyn.test.framework.TestEffector
             name: Invoke restart Effector
-            targetId: jboss6
             effector: restart
             params:
               restartMachine: false
           - type: org.apache.brooklyn.test.framework.TestSensor
             name: Check JBoss is up after restart
-            targetId: jboss6
             sensor: service.isUp
             assert:
             - equals: true
           - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
             name: Check JBoss process has restarted
-            targetId: jboss6
             command: ps -ef | grep [j]boss
             assertStatus:
               equals: 0
