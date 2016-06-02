@@ -31,7 +31,7 @@ brooklyn.catalog:
         id: jboss6
       - type: org.apache.brooklyn.test.framework.TestCase
         brooklyn.config:
-          timeout: 15m
+          timeout: 1h
           targetId: jboss6
         name: JBoss Application Server 6 Tests
         brooklyn.children:
